@@ -1,0 +1,254 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Software Assignment}
+\author{Sai Akhila }
+\usepackage{amsmath}
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\textbf{Eigen values}: Eigenvalues are scalar values that describe the factor by which the corresponding eigenvectors are stretched or compressed during a linear transformation. They are fundamental to understanding how a matrix acts on a vector space.
+
+Mathematically, for a given square matrix A and a non-zero vector $\vec{v}$, if the matrix A transforms vv into a scalar multiple of vv, the scalar is called the eigenvalue corresponding to the eigenvector $\vec{v}$. This relationship is expressed as:
+\begin{center}
+\begin{equation}
+    A\vec{v}=\lambda\vec{v}
+\end{equation}
+\end{center}
+where \\
+A is a square matrix (of size n×nn×n).\\
+$\vec{v}$ is an eigenvector of AA (a non-zero vector).\\
+$\lambda$ is the eigenvalue corresponding to vv.\\
+\section{Various algorithms widely used for computing eigen values:}
+\subsection{Power iteration}
+\textbf{1. Use case:}
+\begin{itemize}
+    \item To find the largest eigenvalue (in magnitude) and its corresponding eigenvector.\\
+    \item Works well for sparse matrices.
+\end{itemize}
+\textbf{2. Pros:}
+\begin{itemize}
+    \item Simple and easy to implement.
+    \item Computationally inexpensive for large matrices.
+\end{itemize}
+\textbf{3. Cons:}
+\begin{itemize}
+    \item Converges slowly, especially for the eigen values that are close in magnitude.
+    \item Only finds one eigenvalue (the largest in magnitude).
+    \item May fail if the matrix is defective.
+\end{itemize}
+\subsection{Inverse Power Iteration}
+\textbf{1. Use case:}
+\begin{itemize}
+    \item To find the smallest eigenvalue or eigenvalues closest to a specific value.
+    \item Useful for matrices where small eigenvalues are of interest.
+\end{itemize}
+\textbf{2. Pros:}
+\begin{itemize}
+    \item Effective for finding eigenvalues near a specific "shift."
+    \item Faster convergence as compared to standard power iteration.
+\end{itemize}
+\textbf{3. Cons:}
+\begin{itemize}
+    \item Requires solving a linear system at each step, which can be computationally expensive.
+    \item Needs a good initial guess for effective convergence.
+\end{itemize}
+\subsection{Rayleigh Quotient Iteration}
+\textbf{1. Use case:}
+\begin{itemize}
+    \item To refine approximations of eigenvalues and eigenvectors.
+    \item Useful for problems requiring high precision.
+\end{itemize}
+\textbf{2. Pros:}
+\begin{itemize}
+    \item Cubic convergence (extremely fast for well-behaved problems).
+    \item Accurate for symmetric and Hermitian matrices.
+\end{itemize}
+\textbf{3. Cons:}
+\begin{itemize}
+    \item Requires solving a linear system in each iteration, which again can be computationally expensive.
+    \item Highly sensitive to the initial guess.
+\end{itemize}
+\subsection{QR Algorithm}
+\textbf{1. Use case:}
+\begin{itemize}
+    \item To compute all eigenvalues of a dense matrix (general-purpose algorithm).
+    \item Works for both real and complex eigenvalues.
+\end{itemize}
+\textbf{2. Pros:}
+\begin{itemize}
+    \item Robust and widely applicable.
+    \item Efficient for small to medium-sized dense matrices.
+    \item Handles both symmetric and non-symmetric matrices.
+\end{itemize}
+\textbf{3. Cons:}
+\begin{itemize}
+    \item Computationally expensive for large matrices.
+    \item Requires preprocessing for efficiency (e.g., reduction to Hessenberg form).
+\end{itemize}
+\subsection{Jacobi Method}
+\textbf{1. Use case:}
+\begin{itemize}
+    \item To compute all eigenvalues of symmetric matrices.
+    \item Best suited for small to medium-sized matrices.
+\end{itemize}
+\textbf{2. Pros:}
+\begin{itemize}
+    \item Simple and numerically stable.
+    \item Explicitly constructs eigenvalues and eigenvectors.
+    
+\end{itemize}
+\textbf{3. Cons:}
+\begin{itemize}
+    \item Computationally expensive for large matrices.
+    \item Converges slowly compared to other methods like QR.
+\end{itemize}
+\subsection{Arnoldi Iteration}
+\textbf{1. Use case:}
+\begin{itemize}
+    \item To compute a subset of eigenvalues for large, sparse, non-symmetric matrices.
+    \item Popular in scientific computing and numerical simulations.
+\end{itemize}
+\textbf{2. Pros:}
+\begin{itemize}
+    \item Efficient for large matrices.
+    \item Constructs an approximation of the eigenvalues in Krylov subspaces.    
+\end{itemize}
+\textbf{3. Cons:}
+\begin{itemize}
+    \item Requires storing Krylov subspaces, which can become memory-intensive.
+    \item May not converge for specific matrices.
+\end{itemize}
+\subsection{Lanczos Algorithm}
+\textbf{1. Use case:}
+\begin{itemize}
+    \item To compute a subset of eigenvalues for large, sparse, symmetric (or Hermitian) matrices.
+    \item Used in physics, quantum mechanics, and machine learning.
+\end{itemize}
+\textbf{2. Pros:}
+\begin{itemize}
+    \item Memory-efficient compared to Arnoldi.
+    \item Highly efficient for symmetric or Hermitian matrices.   
+\end{itemize}
+\textbf{3. Cons:}
+\begin{itemize}
+    \item May suffer from loss of orthogonality in the Krylov basis.
+    \item Requires reorthogonalization for accurate results.
+\end{itemize}
+\subsection{Divide-and-Conquer Method}
+\textbf{1. Use case:}
+\begin{itemize}
+    \item To compute eigenvalues and eigenvectors of symmetric matrices.
+    \item Efficient for dense matrices.
+\end{itemize}
+\textbf{2. Pros:}
+\begin{itemize}
+    \item Faster than QR for large symmetric matrices.
+    \item Can compute all eigenvalues and eigenvectors. 
+\end{itemize}
+\textbf{3. Cons:}
+\begin{itemize}
+    \item Limited to symmetric matrices.
+    \item Implementation is more complex than QR.
+\end{itemize}
+\subsection{Faddeev-LeVerrier Algorithm}
+\textbf{1. Use case:}
+\begin{itemize}
+    \item To compute the characteristic polynomial of a matrix, from which eigenvalues can be derived.
+\end{itemize}
+\textbf{2. Pros:}
+\begin{itemize}
+    \item Theoretical importance in algebra.
+\end{itemize}
+\textbf{3. Cons:}
+\begin{itemize}
+    \item Numerically unstable for large matrices.
+    \item Rarely used in practical applications.
+\end{itemize}
+\section{Chosen Algorithm}
+\textbf{The QR Algorithm:}
+The QR algorithm is an iterative method used to find the eigenvalues of a square matrix. It is based on decomposing a matrix into its QR decomposition (where Q is an orthogonal matrix and R is an upper triangular matrix), and then iteratively improving the approximation of the eigenvalues.
+\subsection{The Gram-Schmidt orthogonalization}
+Consider a matrix A. It can be represented as 
+\begin{center}
+    $A=\left[\vec{a_1} \vec{a_2}....\vec{a_3}\right]$
+\end{center}
+$\tilde{q}_1 = \vec{a_1}$, $\vec{q_1}=\frac{\tilde{q}_1}{\|\tilde{q}_1\|}$\\
+$\tilde{q}_2 = \vec{a}_2 - (a_2^T\vec{q_1})\vec{q_1}$\\
+$\vec{q_2}=\frac{\tilde{q}_2}{\|\tilde{q}_2\|}$\\
+\textbf{Generalising the algorithm:}\\
+Intialise $\tilde{q}_1=\vec{a_1}$, $\vec{q_1}=\frac{\tilde{q_1}}{\|\tilde{q_1}\|}$\\
+for r=2 to k:\\
+\begin{center}
+$\tilde{q_r} = \vec{a_r} - $\(\sum_{i=1}^{r-1} (a_r^Tq_i)q_i\)\\
+$\vec{q_r}=\frac{\tilde{q}_r}{\|\tilde{q}_r\|}$
+\end{center}
+Hance, we can write any matrix A as: 
+\begin{center}
+A = QR\\
+
+\end{center}
+where Q is the orthogonal matrix that consists of orthogonal basis of A, and image space of A = image space of Q.
+R is an upper triangular matrix, whose diagonal entries are the norms of the respective column vectors and the upper diagonal entries are dots products of the corresponding vectors with the orthogonal vectors in Q (in the indices less than the corresponding index).
+\subsection{Hessenburg reduction:}
+To reduce a matrix A to Hessenberg form, the Householder transformations are commonly used. The process works by successively applying orthogonal transformations to eliminate the elements below the first sub-diagonal.\\
+Householder transformations are used to create zeros below the diagonal and the first subdiagonal of the matrix. The goal is to zero out the entries $A_{i,j}$ for $i>j+1.$\\
+The Householder transformation is a reflection operation that transforms the given matrix by applying orthogonal matrices to it. A Householder matrix H is constructed as:
+\begin{center}
+  $H=I-2\frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}}$
+\end{center}
+
+where $\vec{v}$ is a vector that reflects the given column vector $\vec{x}$ (the portion of the matrix you want to zero out) to align with a scalar multiple of a unit vector. This is done repeatedly for each column, creating the Hessenberg form.\\
+Repeat for all columns.\\
+After applying the transformations, the result will be an upper Hessenberg matrix where all elements below the first sub-diagonal are zero.\\
+
+
+\subsection{Iterating the QR decomposition:}
+\begin{enumerate}
+    \item Perform QR decomposition $A_k=Q_kR_k$
+    \item Compute the next matrix $A_k+1=R_kQ_k$
+    \item Repeat the process until $A_k$ converges to a nearly upper triangular matrix 
+    \item The diagonal entries of the converged matrix are the eigenvalues of A.
+\end{enumerate}
+\section{Time Complexity:}
+The time complexity of the QR algorithm primarily depends on two factors:
+\begin{enumerate}
+    \item The number of iterations required for convergence
+    \item The computational cost of each iteration
+\end{enumerate}
+The total time complexity of the QR algorithm is the product of the cost of one QR decomposition and the number of iterations:
+\begin{enumerate}
+    \item \textbf{Per iteration}: QR decomposition costs O($n^3$)(using Gram-Schmidt algorithm)
+    \item \textbf{Number of iterations}: The algorithm typically converges in O(n) iterations.
+\end{enumerate}
+Thus, the overall time complexity of the QR algorithm is:
+\begin{center}
+    $O(n^3)\times O(n)=O(n^4)$
+\end{center}
+For optimized version\textbf{(Hessenburg reduction)}:
+The matrix is often reduced to Hessenberg form (H) using a pre-processing step that costs O($n^3$).\\This reduces the cost of the QR decomposition to O($n^2$) for Hessenberg matrices.\\
+Time complexity with Hessenberg reduction: O($n^3$) for reduction + O($n^2$) per iteration $\implies$ Overall complexity: O($n^3$)
+\section{Why this algorithm?}
+The QR algorithm is considered one of the most efficient and widely used methods for finding eigenvalues because of its robustness, accuracy, and ability to handle a wide range of matrices. 
+\subsection{Versatility:}
+\begin{itemize}
+    \item \textbf{General-purpose}: The QR algorithm works for both symmetric and non-symmetric matrices, as well as real and complex eigenvalues.
+    \item \textbf{No special assumptions}: Unlike some algorithms (e.g., Jacobi, which requires symmetric matrices), the QR algorithm is applicable to most square matrices.
+\end{itemize}
+\subsection{Efficiency}
+\begin{itemize}
+    \item  \textbf{Hessenberg Reduction}: Before applying the QR iterations, the matrix is often reduced to Hessenberg form (O($n^3$) complexity), simplifying subsequent QR steps.
+    \item \textbf{Iterative Convergence}: Each QR iteration is efficient, with a complexity of O($n^2$) for Hessenberg matrices, making it scalable for moderate-sized matrices.
+\end{itemize}
+\subsection{Computes All Eigenvalues}
+\begin{itemize}
+    \item  The QR algorithm computes all eigenvalues simultaneously, unlike iterative methods like Power Iteration or Lanczos, which only find one or a subset of eigenvalues at a time.
+    \item This makes it highly suitable for dense matrices where a full spectrum of eigenvalues is required.
+\end{itemize}   
+
+\end{document}
+
+
+
